@@ -26,3 +26,8 @@ h5,
 h6 {
   margin: 0;
 }
+
+.base-card{
+  background-color: var(--primary-color);
+  border-radius: 5px;
+}

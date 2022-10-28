@@ -1,0 +1,16 @@
+.filter-container{
+  margin: 10px 0;
+  width: 100%;
+  height: 130px;
+  display: flex;
+  align-items: center;
+  padding-left: 15px;
+  border: 1px solid red;
+}
+
+@media(min-width: 576px){
+  .filter-container{
+    margin: 40px 0;
+    padding-left: 40px;
+  }
+}
