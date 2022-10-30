@@ -2,7 +2,7 @@ import './styles.css';
 import Select from 'react-select';
 import { Controller, useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
-import { Store } from '../../types/store';
+import { Store } from '../../types';
 import { makeRequest } from '../../util/requests';
 
 export type StoreFilterData = {
