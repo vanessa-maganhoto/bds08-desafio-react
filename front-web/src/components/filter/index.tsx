@@ -1,62 +1,53 @@
 import './styles.css';
 import Select from 'react-select';
-import { Controller, useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
-import { Store } from '../../types';
+import { ChartConfig, Store, SumByGender } from '../../types';
 import { makeRequest } from '../../util/requests';
+import { buildSummary } from './helpers';
+import ChartCard from '../chart-card';
 
-export type StoreFilterData = {
-  name: Store | null;
-};
-
-type Props = {
-  onFilterChange: (filter: StoreFilterData) => void;
-};
-
-function Filter({ onFilterChange }: Props) {
+function Filter() {
   const [stores, setStores] = useState<Store[]>([]);
+  const [summary, setSummary] = useState(0);
+  const [sumByGender, setSumByGender] = useState<ChartConfig>();
 
-  const { handleSubmit, setValue, control, getValues } = useForm<StoreFilterData>();
+  const handleChangeStore = (id: number) => {
+    makeRequest.get('/sales/summary?storeId=' + id).then((response) => {
+      setSummary(response.data.sum);
+    });
 
-  const onSubmit = (formData: StoreFilterData) => {
-    onFilterChange(formData);
-  };
-
-  const handleChangeStore = (value: Store) => {
-    setValue('name', value);
-
-    const obj: StoreFilterData = {
-      name: getValues('name')
-    };
-
-    onFilterChange(obj);
+    makeRequest.get<SumByGender[]>('/sales/by-gender?storeId=' + id).then((response) => {
+      setSumByGender(buildSummary(response.data));
+    });
   };
 
   useEffect(() => {
     makeRequest.get('/stores').then((response) => {
       setStores(response.data);
     });
+    handleChangeStore(0);
   }, []);
 
   return (
     <section className="filter-container base-card">
-      <form onSubmit={handleSubmit(onSubmit)} className="filter-form">
-        <Controller
-          name="name"
-          control={control}
-          render={({ field }) => (
-            <Select
-              {...field}
-              options={stores}
-              isClearable
-              classNamePrefix="filter-select"
-              onChange={(value) => handleChangeStore(value as Store)}
-              getOptionLabel={(store: Store) => store.name}
-              getOptionValue={(store: Store) => String(store.id)}
-            />
-          )}
+      <div className="filter-select base-card">
+        <Select
+          options={stores}
+          isClearable
+          classNamePrefix="filter-select"
+          onChange={(value) => handleChangeStore(value ? value.id : 0)}
+          getOptionLabel={(store: Store) => store.name}
+          getOptionValue={(store: Store) => String(store.id)}
         />
-      </form>
+      </div>
+      <div>
+        <ChartCard
+          name=" "
+          labels={sumByGender?.labels}
+          series={sumByGender?.series}
+          sum={summary}
+        />
+      </div>
     </section>
   );
 }

@@ -5,7 +5,12 @@ export type Store = {
   id: number;
 };
 
-export type FilterData = {
-  store?: Store;
-  gender?: Gender;
+export type SumByGender = {
+  gender: Gender;
+  sum: number;
+};
+
+export type ChartConfig = {
+  labels: string[];
+  series: number[];
 };

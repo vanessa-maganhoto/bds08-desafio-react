@@ -1,6 +1,6 @@
 import { ApexOptions } from 'apexcharts';
 
-export const buildPieChartConfig = (labels: string[] = []) => {
+export const buildPieChartConfig = (labels: string[] = [], name: string) => {
   return {
     labels,
     noData: {
@@ -41,10 +41,10 @@ export const buildPieChartConfig = (labels: string[] = []) => {
             show: true,
             name: {
               show: true,
-              offsetY: 10
-              // formatter: function () {
-              //   return name;
-              // }
+              offsetY: 10,
+              formatter: function () {
+                return name;
+              }
             },
             total: {
               show: true,
@@ -65,9 +65,3 @@ export const buildPieChartConfig = (labels: string[] = []) => {
     }
   } as ApexOptions;
 };
-
-// export const sumSalesByStoreAndGender = (salesByStore: SalesByStore[] = []) => {
-//   return salesByStore.reduce((previousValue, currentValue) => {
-//     return previousValue + currentValue.sum;
-//   }, 0);
-// };
