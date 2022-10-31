@@ -6,7 +6,9 @@ function App() {
   return (
     <>
       <Header />
-      <Filter />
+      <div className="app-container">
+        <Filter />
+      </div>
     </>
   );
 }

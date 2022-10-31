@@ -1,8 +1,5 @@
 .app-container{
   padding: 0 10px;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
 }
 
 @media(min-width: 576px){
@@ -14,5 +11,11 @@
 @media(min-width: 992px){
   .app-container{
     padding: 0 15px;
+  }
+}
+
+@media(min-width: 1200px){
+  .app-container{
+    padding: 0 120px;
   }
 }

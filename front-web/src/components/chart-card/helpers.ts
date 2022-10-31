@@ -11,7 +11,7 @@ export const buildPieChartConfig = (labels: string[] = [], name: string) => {
       offsetY: 0,
       style: {
         color: '#FFF',
-        fontSize: '18px',
+        fontSize: '10px',
         fontFamily: 'Ubuntu, sans-serif'
       }
     },
@@ -24,7 +24,7 @@ export const buildPieChartConfig = (labels: string[] = [], name: string) => {
         colors: ['#b4bed2']
       },
       fontFamily: 'Ubuntu, sans-serif',
-      fontSize: '18px',
+      fontSize: '16px',
       itemMargin: {
         vertical: 5
       }
@@ -36,7 +36,7 @@ export const buildPieChartConfig = (labels: string[] = [], name: string) => {
       pie: {
         size: 400,
         donut: {
-          size: '85%',
+          size: '60%',
           labels: {
             show: true,
             name: {
@@ -49,7 +49,7 @@ export const buildPieChartConfig = (labels: string[] = [], name: string) => {
             total: {
               show: true,
               showAlways: true,
-              fontSize: '24px',
+              fontSize: '16px',
               color: '#ABB1C0',
               fontFamily: 'Ubuntu, sans-serif',
               formatter: function () {

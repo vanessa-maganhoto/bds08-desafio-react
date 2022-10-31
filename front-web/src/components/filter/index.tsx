@@ -29,18 +29,19 @@ function Filter() {
   }, []);
 
   return (
-    <section className="filter-container base-card">
-      <div className="filter-select base-card">
+    <div className="filter-container">
+      <div className="filter-div-select base-card">
         <Select
           options={stores}
           isClearable
+          placeholder="Selecione a loja"
           classNamePrefix="filter-select"
           onChange={(value) => handleChangeStore(value ? value.id : 0)}
           getOptionLabel={(store: Store) => store.name}
           getOptionValue={(store: Store) => String(store.id)}
         />
       </div>
-      <div>
+      <div className="filter-card base-card">
         <ChartCard
           name=" "
           labels={sumByGender?.labels}
@@ -48,7 +49,7 @@ function Filter() {
           sum={summary}
         />
       </div>
-    </section>
+    </div>
   );
 }
 
